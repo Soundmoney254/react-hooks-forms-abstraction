@@ -4,6 +4,7 @@ function Form() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
+    admin: false,
   });
 
   // function handleFirstNameChange(event) {
@@ -24,8 +25,11 @@ function Form() {
   function handleChange(event) {
     // name is the KEY in of the formData object we're trying to update
     const name = event.target.name;
-    const value = event.target.value;
-  
+    let value = event.target.value;
+
+    if (event.target.type === "checkbox") {
+      value = event.target.checked;
+    }
     setFormData({
       ...formData,
       [name]: value,
@@ -46,8 +50,14 @@ function Form() {
         value={formData.lastName}
         onChange={handleChange}
       />
+        <input
+      type="checkbox"
+      name="admin"
+      onChange={handleChange}
+      checked={formData.admin}
+      />
 
-  <h2>{formData.firstName}  {formData.lastName}</h2>
+  <h2>{formData.firstName}  {formData.lastName}  {formData.admin}</h2>
     </form>
   );
 }
